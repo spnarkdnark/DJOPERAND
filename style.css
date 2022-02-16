@@ -1,0 +1,261 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font: helvetica;
+    margin-top: 50px;
+}
+
+.outerContainer{
+    height: 650px;
+    width: 500px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 25px;
+    gap: 2px;
+}
+
+p{
+    margin: 5px;
+}
+
+.upperDisplay{
+    display: flex;
+    flex-direction: row;
+    border: 5px solid rgb(44, 43, 43);
+    background-color: rgb(44, 43, 43);
+    flex-grow: 5;
+    gap: 5px;
+}
+
+.leftWidget{
+    flex: .75;
+    height: 100%;
+    background-color: rgb(190, 59, 59);  
+    flex-shrink: 0;
+}
+
+.centerWidgets{
+    display: flex;
+    flex-direction: column;
+    flex: 1.5;
+    gap: 5px;
+    flex-shrink: 0;
+}
+
+.centerWidgetTop{
+    height: 100%;
+    width: 100%;
+    background-color:rgb(190, 59, 59);  
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+#operandTitle{
+    text-align: center;
+    border: 1px solid white;
+    background-color: white;
+    color: rgb(190, 59, 59); 
+}
+
+#operand{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+
+    height: 100%;
+    font-size: 45px;
+}
+
+.centerWidgetBottom{
+    height: 100%;
+    width: 100%;
+    background-color:rgb(190, 59, 59);  
+    flex: 1;
+}
+
+.displayWidget{
+display: flex;
+flex-direction: row;
+flex: 3;
+gap: 5px;
+background-color: rgb(190, 59, 59)
+}
+
+.displayLogo{
+    font-size: 30px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.displayValues{
+    width: 100%;
+    max-width: 100%;
+}
+
+#dummy{
+    background-color: white;
+    color:rgb(190, 59, 59);
+    text-align: right;
+    flex-grow: 0;
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50%{
+        opacity: 50%;
+    }
+}
+
+
+.knobs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-grow: .25;
+    padding-top:10px;
+}
+
+.knob{
+    background-color: lightgray;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+}
+
+.inputButtons{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 4;
+    gap:5px;
+}
+
+.inputButton{
+    background-color: blue;
+    height: 25px;
+    flex: 1;
+    border-radius: 5px;
+    outline-offset: -5px;
+    color: lightgray;
+}
+
+.inputButton:hover{
+    cursor: pointer;
+}
+
+.small{
+    background-color: gray;
+    width: 50px;
+    outline: 2px solid rgb(56, 56, 56);
+    outline-offset: -2px;
+}
+
+.medium{
+    background-color: gray;
+    width: 100%;
+    outline: 2px solid rgb(56, 56, 56);
+    outline-offset: -2px;
+
+    
+}
+
+.main{
+    background-color: rgb(253, 253, 119);
+    height: 100%;
+    outline: 5px solid lightyellow;
+    color: darkgoldenrod;
+}
+
+.red{
+    background-color: coral;
+    outline: 5px solid lightcoral;
+    color: darkred;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.red p{
+    margin-top:6px;
+    margin-left:6px;
+}
+
+.inputRow1{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    gap: 5px;
+    align-items: center;
+}
+
+.inputRow2{
+    display: flex;
+    flex-direction: row;
+    flex: 2;
+    gap: 5px;
+}
+
+.mediumButtons2{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.inputRow3{
+    display: flex;
+    flex-direction: row;
+    flex: 2;
+    gap: 5px;
+
+}
+
+.mediumButtons3{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.inputRow4{
+    display: flex;
+    flex-direction: row;
+    flex: 2;
+    gap: 5px;
+
+}
+
+.mediumButtons4{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.inputRow5{
+    display: flex;
+    flex-direction: row;
+    flex: 2;
+    gap: 5px;
+
+}
+
+.mediumButtons5{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex:1;
+}
+
+#opc{
+    font-size:30px;
+}
+
+
