@@ -81,18 +81,19 @@ p{
 .displayWidget{
 display: flex;
 flex-direction: row;
-flex: 3;
+flex: 5;
 gap: 5px;
 background-color: rgb(190, 59, 59)
 }
 
 .displayLogo{
-    font-size: 30px;
+    font-size: 25px;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px;
+    flex: 1;
 }
 
 .displayValues{
@@ -100,6 +101,7 @@ background-color: rgb(190, 59, 59)
     display: flex;
     flex-direction: column;
     gap: 5px;
+    flex: 3;
 }
 
 #current{

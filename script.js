@@ -2,6 +2,8 @@ let display = [];
 let currentValue = '';
 let storedValue = '';
 let currentOperand = 'n/a';
+let currentChar = '';
+
 
 let currentDisplay = document.querySelector('#current');
 let lastDisplay = document.querySelector('#last');
@@ -24,8 +26,17 @@ const division = function(x,y){
     return x/y;
 }
 
+const modulo = function(x,y){
+    return x%y;
+}
+
+const power = function(x,y){
+    return x**y;
+}
+
 const operate = function(x,y,operand){
-   
+    if (operand === 'c') return;
+    
     switch(operand){
         case '+': return addition(x,y);
         break;
@@ -35,6 +46,9 @@ const operate = function(x,y,operand){
         break;
         case '/': return division(x,y);
         break;
+        case '%': return modulo(x,y);
+        break;
+        case '**': return power(x,y);
         default: return 'null';
     };
 }
@@ -42,36 +56,55 @@ const operate = function(x,y,operand){
 const parseOperand = function(operand){
     if (operand === 'c'){
         resetValues();
-        currentOperand = operand;
         return;
     }
-
     else if (operand === '='){
+        if (currentOperand === '=' || currentOperand === 'n/a'){
+            return;
+        }
         storedValue = operate(Number(storedValue), Number(currentValue), currentOperand);
-        currentValue = '';
     }
 
     else if (storedValue && currentValue){
         storedValue = operate(Number(storedValue), Number(currentValue), currentOperand);
-        currentValue = '';
     }
 
     else if (storedValue){
-        currentOperand = operand;
         return;
     }
 
     else{
         storedValue = currentValue;
-        currentValue = '';
     }
-    currentOperand = operand;
    
 };
 
 const resetValues = function(){
     currentValue = '';
     storedValue = '';
+    currentOperand = '';
+}
+
+const handleAudio = function(item){
+    let audio = document.querySelector(`audio[data-key='${item.dataset.key}']`)
+    if (!audio) return;
+    audio.currentTime = 0;
+    audio.play();
+}
+
+const validateInput = function(input){
+    if (currentValue.length >= 8){
+        errorText = 'overflow error!';
+        return false;
+    }
+    if (input === '.' && currentChar === '.'){
+        errorText = 'too many decimals!'
+        return false;
+    }
+    if (input === '.' && currentValue.includes('.')){
+        return false;
+    }
+    else return true;
 }
 
 const getAllInputListeners = function(){
@@ -81,13 +114,24 @@ const getAllInputListeners = function(){
             let inputValue = item.id[1];
             if (inputType === 'o'){
                 parseOperand(inputValue);
+                currentValue = '';
+                currentOperand = inputValue;
             }
             else if (inputType === 'v'){
-                currentValue += inputValue;
+                if (currentOperand === '='){
+                    storedValue = '';
+                }
+                if (validateInput(inputValue)){
+                    console.log('hello');
+                    currentValue += inputValue;
+                    currentChar = inputValue;
+                }
             }
+            handleAudio(item);
             currentDisplay.textContent = currentValue;
             lastDisplay.textContent = storedValue;
             operand.textContent = currentOperand;
+            
 
         },true);});
 }
