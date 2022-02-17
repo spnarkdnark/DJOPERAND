@@ -9,6 +9,10 @@ body{
     gap: 15px;
 }
 
+#WIP{
+    color: gray;
+}
+
 .outerContainer{
     height: 650px;
     width: 500px;
