@@ -1,4 +1,4 @@
-let display = [];
+let storedArray = ['.','.','.','.','.','.','.','.','.','.'];
 let currentValue = '';
 let storedValue = '';
 let currentOperand = 'n/a';
@@ -8,6 +8,18 @@ let currentChar = '';
 let currentDisplay = document.querySelector('#current');
 let lastDisplay = document.querySelector('#last');
 let operandDisplay = document.querySelector('#operand');
+let storedArrayDom = document.querySelector('.leftWidgetContainer').children;
+let clearButton = document.querySelector('#clear');
+
+const clearStoredArray = function(){
+    storedArray = ['.','.','.','.','.','.','.','.','.','.'];
+    for (i = 0; i < storedArray.length; i++){
+        storedArrayDom[i].textContent = storedArray[i];
+    };
+}
+
+clearButton.addEventListener('click', clearStoredArray);
+
 
 const addition = function(x, y){
     return x+y;
@@ -48,7 +60,7 @@ const operate = function(x,y,operand){
         break;
         case '%': return modulo(x,y);
         break;
-        case '**': return power(x,y);
+        case '^': return power(x,y);
         default: return 'null';
     };
 }
@@ -60,6 +72,7 @@ const parseOperand = function(operand){
     }
     else if (operand === '='){
         if (currentOperand === '=' || currentOperand === 'n/a'){
+            storedValue = currentValue;
             return;
         }
         storedValue = operate(Number(storedValue), Number(currentValue), currentOperand);
@@ -107,6 +120,17 @@ const validateInput = function(input){
     else return true;
 }
 
+const updateWidget = function(input){
+    if (!input) return;
+    if (storedArray.length >= 10){
+        storedArray.shift();
+    }
+    storedArray.push(input);
+    for (i = 0; i < storedArray.length; i++){
+        storedArrayDom[i].textContent = storedArray[i];
+    }
+}
+
 const getAllInputListeners = function(){
     document.querySelectorAll('.inputButton').forEach(item => {
         item.addEventListener('click', event =>{
@@ -122,16 +146,15 @@ const getAllInputListeners = function(){
                     storedValue = '';
                 }
                 if (validateInput(inputValue)){
-                    console.log('hello');
                     currentValue += inputValue;
                     currentChar = inputValue;
                 }
             }
             handleAudio(item);
+            updateWidget(inputValue);
             currentDisplay.textContent = currentValue;
             lastDisplay.textContent = storedValue;
             operand.textContent = currentOperand;
-            
 
         },true);});
 }

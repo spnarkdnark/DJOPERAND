@@ -29,10 +29,48 @@ p{
 }
 
 .leftWidget{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex: .75;
     height: 100%;
     background-color: rgb(190, 59, 59);  
+    color: white;
     flex-shrink: 0;
+    font-size: 12px;
+    gap: 2px;
+}
+
+.leftWidgetButton{
+    align-self: center;
+}
+
+#clear{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    width: 25px;
+    background-color: red;
+    outline: 2px solid lightcoral;
+    outline-offset: -2px;
+}
+
+#clear:hover{
+    cursor: pointer;
+}
+
+#play{
+    height: 25px;
+    width: 25px;
+    background-color: red;
+}
+
+.leftWidgetContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .centerWidgets{
@@ -145,7 +183,7 @@ background-color: rgb(190, 59, 59)
 .inputButtons{
     display: flex;
     flex-direction: column;
-    flex-grow: 4;
+    flex-grow: 10;
     gap:5px;
 }
 
