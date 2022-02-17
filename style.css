@@ -2,6 +2,11 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     font: helvetica;
     margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
 }
 
 .outerContainer{
@@ -13,6 +18,7 @@ body{
     margin: auto;
     padding: 25px;
     gap: 2px;
+    box-shadow: 5px 5px 5px gray;
 }
 
 p{
@@ -65,6 +71,10 @@ p{
     height: 25px;
     width: 25px;
     background-color: red;
+}
+
+.on{
+    animation: blinker 200ms linear infinite;
 }
 
 .leftWidgetContainer{
@@ -212,8 +222,6 @@ background-color: rgb(190, 59, 59)
     width: 100%;
     outline: 2px solid rgb(56, 56, 56);
     outline-offset: -2px;
-
-    
 }
 
 .main{
@@ -308,3 +316,6 @@ background-color: rgb(190, 59, 59)
 }
 
 
+.footerText{
+    color: black;
+}

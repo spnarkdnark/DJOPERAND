@@ -3,6 +3,8 @@ let currentValue = '';
 let storedValue = '';
 let currentOperand = 'n/a';
 let currentChar = '';
+let beatOn = false;
+let intervalId;
 
 
 let currentDisplay = document.querySelector('#current');
@@ -10,6 +12,7 @@ let lastDisplay = document.querySelector('#last');
 let operandDisplay = document.querySelector('#operand');
 let storedArrayDom = document.querySelector('.leftWidgetContainer').children;
 let clearButton = document.querySelector('#clear');
+let playButton = document.querySelector('#play');
 
 const clearStoredArray = function(){
     storedArray = ['.','.','.','.','.','.','.','.','.','.'];
@@ -18,8 +21,33 @@ const clearStoredArray = function(){
     };
 }
 
-clearButton.addEventListener('click', clearStoredArray);
+const playToggle = function(){
+    if (beatOn === true){
+        beatOn = false;
+        playButton.classList.remove('on');
+        return;
+    }
+    beatOn = true;
+    playButton.classList.add('on');
+}
 
+const playBeat =function(){
+    let intervalIndex = 0;
+    if (beatOn){
+       intervalId = setInterval(function(){
+           let audio = document.querySelector(`audio[data-key='${storedArray[intervalIndex%storedArray.length]}']`);
+           audio.currentTime = 0;
+           audio.play()
+           intervalIndex += 1;
+       },200);
+   }
+   else{
+       clearInterval(intervalId);
+}};
+
+clearButton.addEventListener('click', clearStoredArray);
+playButton.addEventListener('mousedown', playToggle);
+playButton.addEventListener('mouseup', playBeat);
 
 const addition = function(x, y){
     return x+y;
