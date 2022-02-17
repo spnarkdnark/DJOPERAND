@@ -1,9 +1,10 @@
 let display = [];
 let currentValue = '';
-let lastValue = '';
+let storedValue = '';
 let currentOperand = 'n/a';
 
-let dummyDisplay = document.querySelector('#dummy');
+let currentDisplay = document.querySelector('#current');
+let lastDisplay = document.querySelector('#last');
 let operandDisplay = document.querySelector('#operand');
 
 const addition = function(x, y){
@@ -19,18 +20,18 @@ const multiplication = function(x,y){
 }
 
 const division = function(x,y){
-    if (y === 0) return null;
+    if (y === 0) return 'BROKE';
     return x/y;
 }
 
 const operate = function(x,y,operand){
    
     switch(operand){
-        case '+': console.log('+'); return addition(x,y);
+        case '+': return addition(x,y);
         break;
-        case '-': console.log('-');return subtraction(x,y);
+        case '-': return subtraction(x,y);
         break;
-        case '*': console.log('*');return multiplication(x,y);
+        case '*': return multiplication(x,y);
         break;
         case '/': return division(x,y);
         break;
@@ -40,18 +41,38 @@ const operate = function(x,y,operand){
 
 const parseOperand = function(operand){
     if (operand === 'c'){
-        currentValue = '';
-        lastValue = '';
-    }
-    else if (operand === '=' && lastValue){
-        currentValue = operate(Number(lastValue), Number(currentValue), currentOperand);
-    }
-    else{
-        lastValue = currentValue;
-        currentValue = '';
+        resetValues();
         currentOperand = operand;
+        return;
     }
+
+    else if (operand === '='){
+        storedValue = operate(Number(storedValue), Number(currentValue), currentOperand);
+        currentValue = '';
+    }
+
+    else if (storedValue && currentValue){
+        storedValue = operate(Number(storedValue), Number(currentValue), currentOperand);
+        currentValue = '';
+    }
+
+    else if (storedValue){
+        currentOperand = operand;
+        return;
+    }
+
+    else{
+        storedValue = currentValue;
+        currentValue = '';
+    }
+    currentOperand = operand;
+   
 };
+
+const resetValues = function(){
+    currentValue = '';
+    storedValue = '';
+}
 
 const getAllInputListeners = function(){
     document.querySelectorAll('.inputButton').forEach(item => {
@@ -60,13 +81,12 @@ const getAllInputListeners = function(){
             let inputValue = item.id[1];
             if (inputType === 'o'){
                 parseOperand(inputValue);
-                dummyDisplay.textContent = currentValue;
-
             }
             else if (inputType === 'v'){
                 currentValue += inputValue;
             }
-            dummyDisplay.textContent = currentValue;
+            currentDisplay.textContent = currentValue;
+            lastDisplay.textContent = storedValue;
             operand.textContent = currentOperand;
 
         },true);});

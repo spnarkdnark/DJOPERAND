@@ -97,15 +97,24 @@ background-color: rgb(190, 59, 59)
 
 .displayValues{
     width: 100%;
-    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
-#dummy{
+#current{
     background-color: white;
     color:rgb(190, 59, 59);
     text-align: right;
-    flex-grow: 0;
     animation: blinker 1s linear infinite;
+    padding-right: 5px;
+}
+
+#last{
+    text-align: right;
+    color: white;
+    padding-right: 5px;
+    list-style-type: none;
 }
 
 @keyframes blinker {
