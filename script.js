@@ -1,3 +1,4 @@
+let display = '';
 let storedArray = ['.','.','.','.','.','.','.','.','.','.'];
 let currentValue = '';
 let storedValue = '';
@@ -8,11 +9,35 @@ let intervalId;
 
 
 let currentDisplay = document.querySelector('#current');
-let lastDisplay = document.querySelector('#last');
+let storedDisplay = document.querySelector('#last');
 let operandDisplay = document.querySelector('#operand');
 let storedArrayDom = document.querySelector('.leftWidgetContainer').children;
 let clearButton = document.querySelector('#clear');
 let playButton = document.querySelector('#play');
+let tempoSlider = document.querySelector('#tempo');
+let tempo = Number(600);
+
+
+const convertTempo = function(value){
+    return 60000/value;
+}
+
+
+tempoSlider.addEventListener('input', function(e){
+    renderDisplay(currentDisplay, 'tempo: ' + e.target.value);
+    renderDisplay(storedDisplay, 'bpm');
+    tempo = convertTempo(e.target.value);
+});
+
+tempoSlider.addEventListener('change', function(e){
+    renderDisplay(currentDisplay, currentValue);
+    renderDisplay(storedDisplay, storedValue);
+    playBeat();
+});
+
+const renderDisplay = function(displayObject, input){
+    displayObject.textContent = input;
+}
 
 const clearStoredArray = function(){
     storedArray = ['.','.','.','.','.','.','.','.','.','.'];
@@ -33,13 +58,14 @@ const playToggle = function(){
 
 const playBeat =function(){
     let intervalIndex = 0;
+    clearInterval(intervalId);
     if (beatOn){
        intervalId = setInterval(function(){
            let audio = document.querySelector(`audio[data-key='${storedArray[intervalIndex%storedArray.length]}']`);
            audio.currentTime = 0;
            audio.play()
            intervalIndex += 1;
-       },200);
+       },tempo);
    }
    else{
        clearInterval(intervalId);
@@ -180,11 +206,29 @@ const getAllInputListeners = function(){
             }
             handleAudio(item);
             updateWidget(inputValue);
+            handleAnimation(item);
             currentDisplay.textContent = currentValue;
-            lastDisplay.textContent = storedValue;
+            storedDisplay.textContent = storedValue;
             operand.textContent = currentOperand;
-
         },true);});
 }
+
+const handleAnimation = function(item){
+    if (!item.classList.contains('main')){
+        return;
+    }
+    item.classList.add('playing');
+}
+
+const removeTransition = function(e){
+    if (e.propertyName !== 'transform'){
+        return;
+    }
+    e.target.classList.remove('playing');
+}
+
+const allKeys = Array.from(document.querySelectorAll('.main'));
+
+allKeys.forEach(key => key.addEventListener('transitionend', removeTransition));
 
 getAllInputListeners();

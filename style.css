@@ -64,6 +64,7 @@ p{
     width: 25px;
     background-color: red;
     outline: 2px solid lightcoral;
+    border: 3px solid lightgoldenrodyellow;
     outline-offset: -2px;
 }
 
@@ -75,6 +76,13 @@ p{
     height: 25px;
     width: 25px;
     background-color: red;
+    outline: 2px solid lightcoral;
+    border: 3px solid lightgoldenrodyellow;
+    outline-offset: -2px;
+}
+
+#play:hover{
+    cursor: pointer;
 }
 
 .on{
@@ -181,7 +189,8 @@ background-color: rgb(190, 59, 59)
 .knobs{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    gap: 25px;
     align-items: center;
     flex-grow: .25;
     padding-top:10px;
@@ -192,7 +201,29 @@ background-color: rgb(190, 59, 59)
     height: 50px;
     width: 50px;
     border-radius: 100%;
+    flex-shrink: 0;
 }
+
+#tempo{
+    appearance: none;
+    height: 5px;
+    background-color: rgb(71, 71, 71);
+    border-radius: 0%;
+    width: 90px;
+}
+
+#tempo::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: black;
+    border: 3px solid darkgray;
+    outline: 1px solid red;
+    outline-offset: -3px;
+    cursor: pointer;
+  }
 
 .inputButtons{
     display: flex;
@@ -234,6 +265,13 @@ background-color: rgb(190, 59, 59)
     outline: 5px solid lightyellow;
     color: darkgoldenrod;
 }
+
+.playing {
+    transform: scale(1.05);
+    transition-duration: 100ms;
+    border-color: #ffc600;
+    box-shadow: 0 0 1rem #ffc600;
+  }
 
 .red{
     background-color: coral;
