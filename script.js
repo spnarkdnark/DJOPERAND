@@ -204,12 +204,18 @@ const getAllInputListeners = function(){
                     currentChar = inputValue;
                 }
             }
+            else if (item.id === 'del'){
+                currentValue = currentValue.substring(0,currentValue.length-1);
+                currentDisplay.textContent = currentValue;
+                return;
+            }
             handleAudio(item);
             updateWidget(inputValue);
             handleAnimation(item);
             currentDisplay.textContent = currentValue;
             storedDisplay.textContent = storedValue;
             operand.textContent = currentOperand;
+            console.log(item);
         },true);});
 }
 
